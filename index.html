@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>歌曲计数器</title>
+    <style>
+      body {
+        background-color: black;
+        color: white;
+      }
+      .unit {
+        width: 40px;
+      }
+      div {
+        margin: 20px;
+      }
+      .start-time {
+        color: rgb(224, 224, 176);
+      }
+      .current-time {
+        color: rgb(226, 226, 97);
+      }
+      .coast {
+        color: yellow;
+      }
+      .real-num {
+        color: yellow;
+      }
+      button {
+        width: 100px;
+        margin: 20px;
+        margin-left: 0;
+        padding: 5px;
+      }
+      button:hover {
+        color: rgb(255, 0, 47);
+        font-weight: bold;
+      }
+      h2 {
+        text-align: center;
+        color: #c71919;
+      }
+      body,html{
+        height: 100%;
+        overflow: hidden;
+      }
+      body{
+        text-align: center;
+      }
+      section{
+        text-align: left;
+        display: inline-block;
+        margin-top: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div>
+        <h2>歌曲计数器</h2>
+      </div>
+      <div>
+        <span>设置每曲时间: <input class="unit" value="3" />分钟/曲</span>
+      </div>
+      <div><span>开始时间:</span> <span class="start-time"></span></div>
+      <div><span>当前时间:</span> <span class="current-time"></span></div>
+
+      <div><span>共耗时:</span> <span class="coast"></span></div>
+
+      <div><span>曲数计算:</span> <span class="minu"></span></div>
+
+      <div>
+        <button onclick="start()">开始</button>
+        <button onclick="stop()">结束</button>
+      </div>
+    </section>
+    <script>
+      let state = true;
+      let timer;
+      function start(startTime) {
+        // 开始时间
+        if (startTime) startTime = new Date(startTime);
+        else {
+          let answer = confirm("确定要开始？");
+          if (!answer) return;
+          startTime = new Date();
+        }
+        document.querySelector(".start-time").innerText =
+          startTime.toLocaleString();
+        //   存入localStorage中
+        localStorage.startTime = startTime;
+
+        //每曲耗时
+        let unit = document.querySelector(".unit").value - 0;
+
+        // 当前时间
+        timer = setInterval(() => {
+          if (!state) return; //点击停止时就将其置为false
+          let currentTime = new Date();
+          document.querySelector(".current-time").innerText =
+            currentTime.toLocaleString();
+          // 耗时
+          let sec = (currentTime - startTime) / 1000; //秒
+          let min = sec / 60; //分
+          document.querySelector(".coast").innerText =
+            Math.floor(min) +
+            " 分钟 " +
+            (sec - Math.floor(min) * 60).toFixed(0) +
+            " 秒";
+
+          // 曲数计算
+          let num = (min / unit).toFixed(2);
+          document.querySelector(".minu").innerHTML =
+            num +
+            "曲(<span class='real-num'> " +
+            Math.ceil(num) +
+            " 曲</span> )";
+          // 保存数据到本地
+          localStorage.unit = unit;
+        }, 1000);
+      }
+
+      function stop() {
+        let answer = confirm("确定要开始？");
+        if (!answer) return;
+        localStorage.clear();
+        clearInterval(timer);
+      }
+      //手机从休眠中恢复
+      if (localStorage.startTime) {
+        start(localStorage.startTime);
+      }
+    
+    </script>
+  </body>
+</html>
