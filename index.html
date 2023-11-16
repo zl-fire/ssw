@@ -41,14 +41,15 @@
         text-align: center;
         color: #c71919;
       }
-      body,html{
+      body,
+      html {
         height: 100%;
         overflow: hidden;
       }
-      body{
+      body {
         text-align: center;
       }
-      section{
+      section {
         text-align: left;
         display: inline-block;
         margin-top: 100px;
@@ -90,16 +91,14 @@
           startTime.toLocaleString();
         //   存入localStorage中
         localStorage.startTime = startTime;
-
-        //每曲耗时
-        let unit = document.querySelector(".unit").value - 0;
-
         // 当前时间
         timer = setInterval(() => {
           if (!state) return; //点击停止时就将其置为false
           let currentTime = new Date();
           document.querySelector(".current-time").innerText =
             currentTime.toLocaleString();
+          //每曲耗时
+          let unit = document.querySelector(".unit").value - 0;
           // 耗时
           let sec = (currentTime - startTime) / 1000; //秒
           let min = sec / 60; //分
@@ -131,7 +130,6 @@
       if (localStorage.startTime) {
         start(localStorage.startTime);
       }
-    
     </script>
   </body>
 </html>
