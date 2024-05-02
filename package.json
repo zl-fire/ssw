@@ -1,0 +1,26 @@
+{
+  "name": "ssw",
+  "version": "1.0.0",
+  "description": "舞蹈计曲器",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "bstart": "forever start sswServer.js",
+    "bstop": "forever stop sswServer.js",
+    "list": "forever list"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zl-fire/ssw.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zl-fire/ssw/issues"
+  },
+  "homepage": "https://github.com/zl-fire/ssw#readme",
+  "dependencies": {
+    "forever": "^4.0.3"
+  }
+}
