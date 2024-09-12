@@ -4,7 +4,7 @@
   "description": "舞蹈计曲器",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node sswServer.js",
     "bstart": "forever start sswServer.js",
     "bstop": "forever stop sswServer.js",
     "list": "forever list"
