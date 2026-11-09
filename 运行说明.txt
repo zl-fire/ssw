@@ -1,0 +1,4 @@
+运行步骤如下：
+1. 首先通过：npm i 命令安装模块，如果npm i 不行就通过cnpm i
+2. 安装好后就可以使用npm run bstart在后台启动项目，也可以通过 npm run bstop停止在后台的项目
+3. 端口在sswServer.js文件中设置的是3000·
